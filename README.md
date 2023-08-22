@@ -11,48 +11,60 @@ This dataset contains detailed data from more than 7000 mobile applications with
 The sqlonline webpage has a little downside, its free version doesn't support files as big as appleStore_description_combined.csv. That's why the original appleStore_description.csv file was partitioned into 4 pieces and later merged using the CREATE TABLE and UNION ALL commands. That's the reason behind the second file being called "_combined.csv". 
 
 The contents of appStore.csv are listed as the following:
-
-“id” : App ID
-
-“track_name”: App Name
-
-“size_bytes”: Size (in Bytes)
-
-“currency”: Currency Type
-
-“price”: Price amount
-
-“rating_count_tot”: User Rating counts (for all version)
-
-“rating_count_ver”: User Rating counts (for current version)
-
-“user_rating” : Average User Rating value (for all version)
-
-“user_rating_ver”: Average User Rating value (for current version)
-
-“ver” : Latest version code
-
-“cont_rating”: Content Rating
-
-“prime_genre”: Primary Genre
-
-“sup_devices.num”: Number of supported devices
-
-“ipadSc_urls.num”: Number of screenshots shown for display
-
-“lang.num”: Number of supported languages
-
-“vpp_lic”: Vpp Device Based Licensing Enabled
+  - id: App ID
+  - track_name: App Name
+  - size_bytes: Size (in Bytes)
+  - currency: Currency Type
+  - price: Price amount
+  - rating_count_tot: User Rating counts (for all version)
+  - rating_count_ver: User Rating counts (for current version)
+  - user_rating: Average User Rating value (for all version)
+  - user_rating_ver: Average User Rating value (for current version)
+  - ver: Latest version code
+  - cont_rating: Content Rating
+  - prime_genre: Primary Genre
+  - sup_devices.num: Number of supported devices
+  - ipadSc_urls.num: Number of screenshots shown for display
+  - lang.num: Number of supported languages
+  - vpp_lic: Vpp Device Based Licensing Enabled
 
 The contents of appleStore_description.csv are listed as the following:
-
-id : App ID
-
-track_name: Application name
-
-size_bytes: Memory size (in Bytes)
-
-app_desc: Application description
-
+  - id: App ID
+  - track_name: Application name
+  - size_bytes: Memory size (in Bytes)
+  - app_desc: Application description
 
 The sqlonline webpage has a little downside, its free version doesn't support files as big as appleStore_description.csv. That's why this file was partitioned into 4 pieces and later merged using the CREATE TABLE and UNION ALL commands. 
+
+## Guiding Questions
+To figure out what apps in the Apple App Store have the potential to be successful, the following guiding questions were proposed.
+
+  1. What are the app statistics for different groups?
+  2. Are paid apps better than free apps?
+  3. What are some possible factors that contribute to higher user ratings?
+
+## Exploratory Data Analysis
+To begin with, I check the number of unique apps in both tables looking for a match. We retrieved 7197 unique app IDs for both tables.  
+```
+SELECT COUNT(DISTINCT id) AS UniqueAppIDs
+FROM AppleStore
+
+SELECT COUNT(DISTINCT id) AS UniqueAppIDs
+FROM appleStore_description_combined
+```
+
+Then I searched for missing values in any key field in both tables. None was discovered.
+```
+SELECT COUNT(*) AS MissingValues
+FROM AppleStore
+WHERE track_name is null OR user_rating IS null OR prime_genre IS null
+
+SELECT COUNT(*) AS MissingValues
+FROM appleStore_description_combined
+WHERE app_desc is null
+```
+
+
+
+
+
