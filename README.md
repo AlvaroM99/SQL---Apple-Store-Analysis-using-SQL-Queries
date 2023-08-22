@@ -84,9 +84,10 @@ Digging deeper, I also plotted a pie chart that shows the distribution of each r
 
 </br></br>Following with the exploratory analysis, I then looked for the apps' ratings so that we have an overview of this key variable for the upcoming data analysis. I searched for the minimun and the maximun to check if there was any wrong value and the average of all the apps.
 ```
-SELECT min(user_rating) AS MinRating,
-	   max(user_rating) AS MaxRating,
-       avg(user_rating) AS AvgRating
+SELECT
+	min(user_rating) AS MinRating,
+	max(user_rating) AS MaxRating,
+	avg(user_rating) AS AvgRating
 FROM AppleStore
 ```
 The outcome of this statement was the foreseeable, 0 for the minimun, 5 for the maximun and roughly 3.5 for the average.
@@ -95,9 +96,10 @@ The outcome of this statement was the foreseeable, 0 for the minimun, 5 for the 
 
 </br></br>To finish the exploratory analysis I overviewed the price parameter, its minimun, its maximun and average. Then I got the distribution of app prices.
 ```
-SELECT min(price) AS MinPrice,
-	   max(price) AS MaxPrice,
-       avg(price) AS AvgPrice
+SELECT
+	min(price) AS MinPrice,
+	max(price) AS MaxPrice,
+	avg(price) AS AvgPrice
 FROM AppleStore
 ```
 This was the statement's outcome:
@@ -107,15 +109,15 @@ For the distribution the statement was increasingly complicated. As each app has
 ```
 SELECT
 	(price/2)*2 AS PriceBinStart,
-    ((price/2)*2)+2 AS PriceBinEnd,
-    COUNT (*) AS NumApps
+	((price/2)*2)+2 AS PriceBinEnd,
+	COUNT (*) AS NumApps
 FROM AppleStore
 GROUP BY PriceBinStart
 ORDER BY PriceBinStart
 ```
 ```
 SELECT CASE
-			WHEN price = 0 THEN '0'
+	    WHEN price = 0 THEN '0'
             WHEN price BETWEEN 0.0001 AND 5 THEN '0.001-5$'
             WHEN price BETWEEN 5.0001 AND 10 THEN '5-10$'
             WHEN price BETWEEN 10.0001 AND 25 THEN '10-25$'
@@ -138,11 +140,12 @@ Most of the apps are free, that's why the 0-2 range accounts for more than half 
 
 
 
-##Data Analysis
+## Data Analysis
+
 First of all, I determined if paid apps have higher ratings than free apps.
 ```
 SELECT CASE
-			WHEN price > 0 THEN 'Paid'
+	    WHEN price > 0 THEN 'Paid'
             ELSE 'Free'
        END AS App_Type,
        avg(user_rating) As AvgRating
@@ -150,13 +153,14 @@ FROM AppleStore
 GROUP BY App_Type
 ```
 This was the outcome:
+
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/41583b4e-5180-42b5-9b71-86cd34ba6e4b)
 
 
 </br></br>Then I tried to determine whether apps that support more languages have higher ratings.
 ```
 SELECT CASE
-			WHEN lang_num < 10 THEN '<10 languages'
+	    WHEN lang_num < 10 THEN '<10 languages'
             WHEN lang_num BETWEEN 10 AND 30 THEN '10-30 languages'
             ELSE '>30 languages'
        END AS language_bucket,
@@ -171,7 +175,8 @@ ORDER BY Avg_Rating DESC
 
 </br></br>Following the pursue of the factors that makes app ratings higher I checked the genres with higher average ratings. It's interesting how Gaming might be the most popular genre but it is far behing other categories when it comes to the quality of these apps. A possible explanation might be the vast presence of shovel-ware and the fact that only by dowloading the app the developer earns some money, as it is, the developer only have to make you download the app but there's no further reward in workinng on the retention in the app.
 ```
-BAR-SELECT prime_genre,
+SELECT
+       prime_genre,
        avg(user_rating) AS Avg_Rating
 FROM AppleStore
 GROUP BY prime_genre
@@ -184,8 +189,8 @@ ORDER BY Avg_Rating DESC
 
 </br></br>Another interesting insight is the correlation between the length of the app description and its rating. To check if there's an existing correlation I applied the followig statement. There is. Longer descriptions have better ratings.
 ```
-LINE-SELECT CASE
-		   WHEN length(b.app_desc) < 500 THEN 'Short'
+SELECT CASE
+	   WHEN length(b.app_desc) < 500 THEN 'Short'
            WHEN length(b.app_desc) BETWEEN 500 AND 1000 THEN 'Medium'
            ELSE 'Long'
       END AS description_length_bucket,
@@ -205,21 +210,25 @@ ORDER BY average_rating ASC
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/614259a6-af78-43a4-a5df-26bcac74215d)
 
 
-</br></br>Finally I loof for the best rated app for each genre.
+</br></br>It might be interesting also to test if other factors such as the number of screenshots, the number of devices supported or the size of the app are influential factors over the user rating.
+```
+
+```
+
+</br></br>Finally I look for the best-rated app for each genre.
 ```
 SELECT
-	prime_genre,
+    prime_genre,
     track_name,
     user_rating
 FROM(
   	SELECT
     	prime_genre,
     	track_name,
-  		user_rating,
-  		RANK() OVER(PARTITION by prime_genre ORDER BY user_rating DESC, rating_count_tot DESC) AS rank
-  		FROM
-  		AppleStore
-  		) AS a
+	user_rating,
+	RANK() OVER(PARTITION by prime_genre ORDER BY user_rating DESC, rating_count_tot DESC) AS rank
+	FROM AppleStore
+	) AS a
  WHERE
  a.rank = 1
 ```
