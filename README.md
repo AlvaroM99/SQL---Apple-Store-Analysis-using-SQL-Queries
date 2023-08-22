@@ -1,1 +1,1 @@
-# SQL---Apple-Store-Querying-Analysis
+# SQL- AppleStore Querying Analysis
