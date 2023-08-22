@@ -53,7 +53,7 @@ SELECT COUNT(DISTINCT id) AS UniqueAppIDs
 FROM appleStore_description_combined
 ```
 
-Then I searched for missing values in any key field in both tables. None was discovered.
+</br>Then I search for missing values in any key field in both tables. None was discovered.
 ```
 SELECT COUNT(*) AS MissingValues
 FROM AppleStore
@@ -64,7 +64,19 @@ FROM appleStore_description_combined
 WHERE app_desc is null
 ```
 
+</br>A first approach to start the analysis was looking for the number of unique apps per genre. Then I plotted a bar chart changing the command SELECT by BAR-SELECT. 
+```
+SELECT prime_genre, COUNT(*) AS NumApps
+FROM AppleStore
+GROUP BY prime_genre
+ORDER BY NumApps DESC
+```
 
+From the bar chart, I found out that Games, Entertainment, Education, Photos & Videos, and Utilities are the top 5 largest categories. However, the category of Games outshines the rest as it surpasses the second-largest category (Entertainment) by almost 7 times.
 
+![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/98602544-999a-4cdb-85db-1ce303b92ba7)
 
+Digging deeper, I also plotted a pie chart that shows the distribution of each relevant category by changing SELECT with PIE-SELECT and adding an ending limiting clause to only plot the 5 most important categories. The purpose is to visualize the huge proportion that games take up in the app market when compared to other application categories. As intended, the chart perfectly depicts how the Games category accounts for most of the AppleStore market share and thus the gaming industry is shown to be the mainstay of the AppleStore service
+![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/88ecd76a-e937-46d6-8d17-7cba78cee908)
 
+</br>
