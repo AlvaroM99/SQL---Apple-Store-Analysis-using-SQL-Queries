@@ -42,8 +42,9 @@ To figure out what apps in the Apple App Store have the potential to be successf
   2. Are paid apps better than free apps?
   3. What are some possible factors that contribute to higher user ratings?
 
+
 ## Exploratory Data Analysis
-To begin with, I checked the number of unique apps in both tables looking for a match. We retrieved 7197 unique app IDs for both tables.  
+To begin with, I checked the number of unique apps in both tables looking for a match. I retrieved 7197 unique app IDs for both tables.  
 ```
 SELECT COUNT(DISTINCT id) AS UniqueAppIDs
 FROM AppleStore
@@ -53,7 +54,7 @@ FROM appleStore_description_combined
 ```
 
 
-</br></br>Then I search for missing values in any key field in both tables. None was discovered.
+</br></br>Then I searched for missing values in any key field in both tables. None was discovered.
 ```
 SELECT COUNT(*) AS MissingValues
 FROM AppleStore
@@ -103,9 +104,10 @@ SELECT
 FROM AppleStore
 ```
 This was the statement's outcome:
+
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/94e7e699-a6cc-4946-80bc-85cc741c5ee6)
 
-For the distribution the statement was increasingly complicated. As each app has a different price I had to categorize each app into increasing ranges by defining the start of the interval as PriceBinStart and the end of it as PriceBinEnd. Sadly, SQLite 3 doesn't support columns with interval values, thus merging the two generated columns into an interval column was not an option. 
+For the price distribution, the statement was increasingly complicated. As each app has a different price I had to categorize each app into increasing ranges by defining the start of the interval as PriceBinStart and the end of it as PriceBinEnd. Sadly, SQLite 3 doesn't support columns with interval values, thus merging the two generated columns into an range column was not an option. 
 ```
 SELECT
 	(price/2)*2 AS PriceBinStart,
@@ -115,7 +117,7 @@ FROM AppleStore
 GROUP BY PriceBinStart
 ORDER BY PriceBinStart
 ```
-However this snippet of code as fast and lightweight as it is, was useles when trying to visualize it with the in-engine visualization tool embedded in sqlonline. It nedded two columns acting as x and y, and merging the prices columns was impossible. Hence, I had to wrap my mind around and come out with a solution which is far less elegant but works when it comes to visualize the results.
+However, this snippet of code as fast and lightweight as it is, was useles when trying to visualize it with the limited in-engine visualization tool embedded in sqlonline. It needed two columns acting as x and y, and merging the prices columns was impossible. Hence, I had to wrap my mind around and come out with a solution that is far less elegant but works when it comes to visualizing the results.
 ```
 SELECT CASE
 	    WHEN price = 0 THEN '0'
@@ -132,7 +134,7 @@ FROM AppleStore
 GROUP BY price_bucket
 ORDER BY NumApps DESC
 ```
-Most of the apps are free, that's why the 0 to 5$ range accounts for more than half of the apps. As the price interval increases the number of apps start to shrink, up to the point where ranges above 25 dollars account for very few apps.
+Most of the apps are free, that's why the [0 to 5$ range accounts for more than half of the apps. As the price interval increases the number of apps starts to shrink, up to the point where ranges above 25 dollars account for very few apps.
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/1c15e97b-eccc-4f8d-8ce2-ebe48cc2c894)
 
@@ -150,7 +152,7 @@ SELECT CASE
 FROM AppleStore
 GROUP BY App_Type
 ```
-This was the outcome:
+The output unveiled a significant difference of 0.35 in the rating, which suggests that paid apps have better quality than free ones. It may not be seen as a huge difference but it is, regarding the short 0 to 5 scale of the user rating variable and the measures being averages of the users' ratings.
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/41583b4e-5180-42b5-9b71-86cd34ba6e4b)
 
@@ -167,11 +169,12 @@ FROM AppleStore
 GROUP BY language_bucket
 ORDER BY Avg_Rating DESC
 ```
+As the plot shows there is no linear correlation between the number of languages supported by the app and the user rating when the number of languages surpasses 10. To sum up, more languages won't get the app better ratings, however, when there are too few languages supported the user rating will decrease. The explanation beneath this behavior might be that implementing the most talked languages will ensure a better rating but implementing less spread languages won't.  
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/731ef5ab-8291-4cbd-a628-603e2a8f7199)
 
 
-</br></br>Following the pursuit of the factors that make app ratings higher I checked the genres with higher average ratings. It's interesting how Gaming is the most popular genre but it is far behind other categories when it comes to the quality of these apps. A possible explanation might be the vast presence of shovel-ware and the fact that only by downloading the app does the developer earn some money, as it is, the developer only has to make you download the app but there's no further reward for working on the retention in the app.
+</br></br>Following the pursuit of the factors that make app ratings higher I checked the genres with higher average ratings. 
 ```
 SELECT
        prime_genre,
@@ -180,12 +183,13 @@ FROM AppleStore
 GROUP BY prime_genre
 ORDER BY Avg_Rating DESC
 ```
+It's interesting how Gaming is the most popular genre but it is far behind other categories when it comes to the quality of these apps. A possible explanation might be the vast presence of shovel-ware and the fact that only by downloading the app does the developer earn some money, as it is, the developer only has to make you download the app but there's no further reward for working on the retention in the app.
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/b88e84f2-d0aa-4796-bc9c-c4fab2b18e56)
 
 
 
-</br></br>Another interesting insight is the correlation between the length of the app description and its rating. To check if there's an existing correlation I applied the following statement. There is. Longer descriptions have better ratings.
+</br></br>Another interesting insight is the correlation between the length of the app description and its rating. To check if there's an existing correlation I applied the following statement. 
 ```
 SELECT CASE
 	   WHEN length(b.app_desc) < 500 THEN 'Short'
@@ -204,13 +208,14 @@ ON
 GROUP BY description_length_bucket
 ORDER BY average_rating ASC
 ```
+There is a linear correlation. Longer descriptions have better ratings.
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/614259a6-af78-43a4-a5df-26bcac74215d)
 
 
-</br></br>It might also be interesting to test if other factors such as the number of screenshots, the number of devices supported or the size of the app are influential factors over the user rating. When the number of devices supported and the size of the application were tested versus de user rating, no correlation was unveiled.
+</br></br>It might also be interesting to test if other factors such as the number of screenshots, the number of devices supported or the size of the app are influential over the user rating. When the number of devices supported and the size of the application were tested versus the user rating, no correlation was unveiled.
 
-However, when the number of screenshots in the application description ("ipadsc_urls_num") was tested against the user rating, the outcome suggested a strong correlation. As the number of screenshots increases, so it does the average user rating.
+However, when the number of screenshots in the application description ("ipadsc_urls_num") was tested against the user rating, the outcome suggested a strong correlation. As the number of screenshots increases, so does the average user rating.
 ```
 SELECT
        ipadsc_urls_num,
@@ -223,7 +228,7 @@ ORDER BY Avg_Rating ASC
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/5f6283e6-4782-401e-b553-38971cfb44c2)
 
 
-</br></br>Finally I look for the best-rated app for each genre.
+</br></br>Finally, I look for the best-rated app for each genre.
 ```
 SELECT
     prime_genre,
@@ -243,3 +248,6 @@ FROM(
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/8793b85b-ede2-421f-b92e-9e1a4916c0fa)
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/affe6528-5a99-491f-8268-c0f6387f8795)
+
+
+## Conclusions
