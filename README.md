@@ -173,7 +173,7 @@ ORDER BY Avg_Rating DESC
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/731ef5ab-8291-4cbd-a628-603e2a8f7199)
 
 
-</br></br>Following the pursue of the factors that makes app ratings higher I checked the genres with higher average ratings. It's interesting how Gaming might be the most popular genre but it is far behing other categories when it comes to the quality of these apps. A possible explanation might be the vast presence of shovel-ware and the fact that only by dowloading the app the developer earns some money, as it is, the developer only have to make you download the app but there's no further reward in workinng on the retention in the app.
+</br></br>Following the pursuit of the factors that make app ratings higher I checked the genres with higher average ratings. It's interesting how Gaming is the most popular genre but it is far behind other categories when it comes to the quality of these apps. A possible explanation might be the vast presence of shovel-ware and the fact that only by downloading the app does the developer earn some money, as it is, the developer only has to make you download the app but there's no further reward for working on the retention in the app.
 ```
 SELECT
        prime_genre,
@@ -187,7 +187,7 @@ ORDER BY Avg_Rating DESC
 
 
 
-</br></br>Another interesting insight is the correlation between the length of the app description and its rating. To check if there's an existing correlation I applied the followig statement. There is. Longer descriptions have better ratings.
+</br></br>Another interesting insight is the correlation between the length of the app description and its rating. To check if there's an existing correlation I applied the following statement. There is. Longer descriptions have better ratings.
 ```
 SELECT CASE
 	   WHEN length(b.app_desc) < 500 THEN 'Short'
@@ -210,10 +210,20 @@ ORDER BY average_rating ASC
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/614259a6-af78-43a4-a5df-26bcac74215d)
 
 
-</br></br>It might be interesting also to test if other factors such as the number of screenshots, the number of devices supported or the size of the app are influential factors over the user rating.
+</br></br>It might also be interesting to test if other factors such as the number of screenshots, the number of devices supported or the size of the app are influential factors over the user rating. When the number of devices supported and the size of the application were tested versus de user rating, no correlation was unveiled.
+
+However, when the number of screenshots in the application description ("ipadsc_urls_num") was tested against the user rating, the outcome suggested a strong correlation. As the number of screenshots increases, so it does the average user rating.
+```
+SELECT
+       ipadsc_urls_num,
+       avg(user_rating) AS Avg_Rating
+FROM AppleStore
+GROUP BY ipadsc_urls_num
+ORDER BY Avg_Rating ASC
 ```
 
-```
+![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/5f6283e6-4782-401e-b553-38971cfb44c2)
+
 
 </br></br>Finally I look for the best-rated app for each genre.
 ```
