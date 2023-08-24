@@ -134,7 +134,7 @@ FROM AppleStore
 GROUP BY price_bucket
 ORDER BY NumApps DESC
 ```
-Most of the apps are free, that's why the [0 to 5$ range accounts for more than half of the apps. As the price interval increases the number of apps starts to shrink, up to the point where ranges above 25 dollars account for very few apps.
+Most of the apps are free, that's why the [0 to 5$ range accounts for almost all the apps. As the price interval increases the number of apps starts to shrink, up to the point where ranges above 25 dollars account for very few apps.
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/1c15e97b-eccc-4f8d-8ce2-ebe48cc2c894)
 
@@ -152,7 +152,7 @@ SELECT CASE
 FROM AppleStore
 GROUP BY App_Type
 ```
-The output unveiled a significant difference of 0.35 in the rating, which suggests that paid apps have better quality than free ones. It may not be seen as a huge difference but it is, regarding the short 0 to 5 scale of the user rating variable and the measures being averages of the users' ratings.
+The output unveiled a significant difference of 0.35 in the rating, which suggests that paid apps have better quality than free ones. It may not be seen as a huge difference but it is, regarding the short 0 to 5 scale of the user rating variable and the measures being averages of the users' ratings. This could be due to the fact that users who pay for an app may be predisposed to have a higher engagement and perceive the product they purchased as more valuable.
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/41583b4e-5180-42b5-9b71-86cd34ba6e4b)
 
@@ -172,7 +172,7 @@ FROM AppleStore
 GROUP BY language_bucket
 ORDER BY lang_num ASC
 ```
-As the plot reveals there is no linear correlation between the number of languages supported by the app and the user rating when the number of languages surpasses 15. Implementing more than 15 languages won't get the app better ratings, however, when there are too few languages supported the user rating will strongly decrease. The explanation beneath this behavior might be that implementing the most talked languages will ensure a better rating as more people can use the app, but implementing less spread languages won't as their population is not that relevant in relation to the population of most talked languages.  
+As the plot reveals there is no linear correlation between the number of languages supported by the app and the user rating when the number of languages surpasses 15. Implementing more than 15 languages won't get the app better ratings, however, when there are too few languages supported the user rating will strongly decrease. The explanation beneath this behavior might be that implementing the most spoken languages will ensure a better rating as more people can use the app, but implementing less spread languages won't as their population is not that relevant in relation to the population of most talked languages.  
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/217eeec9-c372-4971-8810-043cb05174ad)
 
@@ -255,3 +255,28 @@ FROM(
 
 
 ## Conclusions
+To summarize the insights unveiled during the querying data analysis I will list them below:
+1. Paid apps generally achieve higher ratings than their free counterparts
+2. Apps supporting a moderate amount of the most spoken languages have higher ratings, so it is not about implementing a lot of languages but focusing on the right ones.
+3. Finance and Books apps have very low ratings but there's a market gap that companies could profit from by developing apps with more features that engage these apps' consumers and potentially occupy their market share.
+4. Apps with longer descriptions and more screenshots can set click expectation and eventually lead to a download. Moreover, well-crafted and clearly depicted descriptions showing the app's features and capabilities are appreciated by users.
+5. Games and Entertainment categories have a very high volume of apps, suggesting that this market may be saturated and entering them might be too challenging. However, this also reveals a high user demand for this genres.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
