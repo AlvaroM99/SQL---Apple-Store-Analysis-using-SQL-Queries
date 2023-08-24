@@ -1,14 +1,12 @@
 # SQL- AppleStore Querying Analysis
 
 ## Overview:
-With the increasing market share of the iPhone many app developers see the App Store as a growing and profitable opportunity. According to Statista, there are nearly 5 million apps available in the Apple App Store as of July 2022. Even though mobile applications can be a great source of income and a showcase for the developer company and its services, this is still a very competitive field. For this reason, an exploratory analysis of the data can provide useful insights for these developers and the company and thus know what makes an app successful.
+With the iPhone's increasing market share, many app developers see the App Store as a growing and profitable opportunity. According to Statista, nearly 5 million apps are available in the Apple App Store as of July 2022. Even though mobile applications can be a great source of income and a showcase for companies and their services, this is still a very competitive field. For this reason, an exploratory analysis of the data can provide useful insights for these developers and their companies, thus knowing what makes an app successful.
 
 For this analysis, I will be using the Kaggle dataset named App Statistics (Apple iOS app store). Data source: [click here](https://www.kaggle.com/datasets/ramamet4/app-store-apple-data-set-10k-apps). To showcase different SQL skills this querying exploratory analysis will be done entirely using the [sqlonline](https://sqliteonline.com/) tool which provides a wide range of engines and an in-engine visualization tool. This time I have chosen SQLite engine instead of MySQL due to its better performance and lightweight.
 
 ## Dataset
 This dataset contains detailed data from more than 7000 mobile applications within the Apple Store. The dataset was extracted from the iTunes Search API in July 2017. In the raw data folder, there are two CSV files; the crucial one is named appleStore.csv and it includes the main characteristics and details of each application, and the other one is called appleStore_description_combined.csv which includes the description of each application. 
-
-The sqlonline webpage has a little downside, its free version doesn't support files as big as appleStore_description_combined.csv. That's why the original appleStore_description.csv file was partitioned into 4 pieces and later merged using the CREATE TABLE and UNION ALL commands. That's the reason behind the second file being called "_combined.csv". 
 
 The contents of appStore.csv are listed as the following:
   - id: App ID
@@ -16,9 +14,9 @@ The contents of appStore.csv are listed as the following:
   - size_bytes: Size (in Bytes)
   - currency: Currency Type
   - price: Price amount
-  - rating_count_tot: User Rating counts (for all version)
-  - rating_count_ver: User Rating counts (for current version)
-  - user_rating: Average User Rating value (for all version)
+  - rating_count_tot: User Rating counts (for all versions)
+  - rating_count_ver: User Rating counts (for the current version)
+  - user_rating: Average User Rating value (for all versions)
   - user_rating_ver: Average User Rating value (for current version)
   - ver: Latest version code
   - cont_rating: Content Rating
@@ -36,6 +34,7 @@ The contents of appleStore_description.csv are listed as the following:
 
 The sqlonline webpage has a little downside, its free version doesn't support files as big as appleStore_description.csv. That's why this file was partitioned into 4 pieces and later merged using the CREATE TABLE and UNION ALL commands. 
 
+
 ## Guiding Questions
 To figure out what apps in the Apple App Store have the potential to be successful, the following guiding questions were proposed.
 
@@ -44,7 +43,7 @@ To figure out what apps in the Apple App Store have the potential to be successf
   3. What are some possible factors that contribute to higher user ratings?
 
 ## Exploratory Data Analysis
-To begin with, I check the number of unique apps in both tables looking for a match. We retrieved 7197 unique app IDs for both tables.  
+To begin with, I checked the number of unique apps in both tables looking for a match. We retrieved 7197 unique app IDs for both tables.  
 ```
 SELECT COUNT(DISTINCT id) AS UniqueAppIDs
 FROM AppleStore
@@ -66,7 +65,7 @@ WHERE app_desc is null
 ```
 
 
-</br></br>A first approach to start the analysis was looking for the number of unique apps per genre. Then I plotted a bar chart changing the command SELECT by BAR-SELECT. 
+</br></br>The first approach to the analysis was looking for the number of unique apps per genre. Then I plotted a bar chart by changing the command SELECT to BAR-SELECT. 
 ```
 SELECT prime_genre, COUNT(*) AS NumApps
 FROM AppleStore
@@ -78,11 +77,12 @@ From the bar chart, I found out that Games, Entertainment, Education, Photos & V
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/98602544-999a-4cdb-85db-1ce303b92ba7)
 
-Digging deeper, I also plotted a pie chart that shows the distribution of each relevant category by changing SELECT with PIE-SELECT and adding an ending limiting clause to only plot the 5 most important categories. The purpose is to visualize the huge proportion that games take up in the app market when compared to other application categories. As intended, the chart perfectly depicts how the Games category accounts for most of the AppleStore market share and thus the gaming industry is shown to be the mainstay of the AppleStore service
+Digging deeper, I also plotted a pie chart that shows the distribution of each relevant category by changing SELECT with PIE-SELECT and adding an ending limiting clause to only plot the 5 most important categories. The purpose is to visualize the huge proportion that games take up in the app market when compared to other application categories. As intended, the chart perfectly depicts how the Games category accounts for most of the AppleStore market share and thus the gaming industry is shown to be the mainstay of the AppleStore service.
+
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/88ecd76a-e937-46d6-8d17-7cba78cee908)
 
 
-</br></br>Following with the exploratory analysis, I then looked for the apps' ratings so that we have an overview of this key variable for the upcoming data analysis. I searched for the minimun and the maximun to check if there was any wrong value and the average of all the apps.
+</br></br>Following the exploratory analysis, I then looked for the apps' ratings so that we have an overview of this key variable for the upcoming data analysis. I searched for the minimum and maximum to check if there was any meaningless value and the average of all the apps.
 ```
 SELECT
 	min(user_rating) AS MinRating,
@@ -90,11 +90,11 @@ SELECT
 	avg(user_rating) AS AvgRating
 FROM AppleStore
 ```
-The outcome of this statement was the foreseeable, 0 for the minimun, 5 for the maximun and roughly 3.5 for the average.
+The outcome of this statement was the foreseeable, 0 for the minimum, 5 for the maximum, and roughly 3.5 for the average.
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/7cd08ce6-dd5a-4b0a-8a9c-42bb98439dc9)
 
 
-</br></br>To finish the exploratory analysis I overviewed the price parameter, its minimun, its maximun and average. Then I got the distribution of app prices.
+</br></br>To finish the exploratory analysis I overviewed the price parameter, its minimum, its maximum, and average. Then I got the distribution of app prices.
 ```
 SELECT
 	min(price) AS MinPrice,
@@ -115,6 +115,7 @@ FROM AppleStore
 GROUP BY PriceBinStart
 ORDER BY PriceBinStart
 ```
+However this snippet of code as fast and lightweight as it is, was useles when trying to visualize it with the in-engine visualization tool embedded in sqlonline. It nedded two columns acting as x and y, and merging the prices columns was impossible. Hence, I had to wrap my mind around and come out with a solution which is far less elegant but works when it comes to visualize the results.
 ```
 SELECT CASE
 	    WHEN price = 0 THEN '0'
@@ -131,12 +132,9 @@ FROM AppleStore
 GROUP BY price_bucket
 ORDER BY NumApps DESC
 ```
-Most of the apps are free, that's why the 0-2 range accounts for more than half of the apps. As the price interval increases the number of apps start to shrink, up the point where ranges above 16 dollars account for one to five apps. The chart output was the following:
+Most of the apps are free, that's why the 0 to 5$ range accounts for more than half of the apps. As the price interval increases the number of apps start to shrink, up to the point where ranges above 25 dollars account for very few apps.
 
-![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/5d4aafeb-5eb3-4c65-be09-c9df4eb0c436)
-
-
-![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/6dd19f56-9450-472d-8bee-08f39811debd)
+![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/1c15e97b-eccc-4f8d-8ce2-ebe48cc2c894)
 
 
 
