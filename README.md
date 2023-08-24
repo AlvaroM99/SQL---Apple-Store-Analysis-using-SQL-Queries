@@ -107,7 +107,7 @@ This was the statement's outcome:
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/94e7e699-a6cc-4946-80bc-85cc741c5ee6)
 
-For the price distribution, the statement was increasingly complicated. As each app has a different price I had to categorize each app into increasing ranges by defining the start of the interval as PriceBinStart and the end of it as PriceBinEnd. Sadly, SQLite 3 doesn't support columns with interval values, thus merging the two generated columns into an range column was not an option. 
+For the price distribution, the statement was increasingly complicated. As each app has a different price I had to categorize each app into increasing ranges by defining the start of the interval as PriceBinStart and the end of it as PriceBinEnd. Sadly, SQLite 3 doesn't support columns with interval values, thus merging the two generated columns into a range column was not an option. 
 ```
 SELECT
 	(price/2)*2 AS PriceBinStart,
@@ -117,7 +117,7 @@ FROM AppleStore
 GROUP BY PriceBinStart
 ORDER BY PriceBinStart
 ```
-However, this snippet of code as fast and lightweight as it is, was useles when trying to visualize it with the limited in-engine visualization tool embedded in sqlonline. It needed two columns acting as x and y, and merging the prices columns was impossible. Hence, I had to wrap my mind around and come out with a solution that is far less elegant but works when it comes to visualizing the results.
+However, this snippet of code as fast and lightweight as it is, was useless when trying to visualize it with the limited in-engine visualization tool embedded in sqlonline. It needed two columns acting as x and y, and merging the prices columns was impossible. Hence, I had to wrap my mind around and come out with a solution that is far less elegant but works when it comes to visualizing the results.
 ```
 SELECT CASE
 	    WHEN price = 0 THEN '0'
@@ -160,18 +160,22 @@ The output unveiled a significant difference of 0.35 in the rating, which sugges
 </br></br>Then I tried to determine whether apps that support more languages have higher ratings.
 ```
 SELECT CASE
-	    WHEN lang_num < 10 THEN '<10 languages'
-            WHEN lang_num BETWEEN 10 AND 30 THEN '10-30 languages'
+	    WHEN lang_num < 5 THEN '<5 languages'
+            WHEN lang_num BETWEEN 5 AND 10 THEN '5-10 languages'
+            WHEN lang_num BETWEEN 10 AND 15 THEN '10-15 languages'
+            WHEN lang_num BETWEEN 15 AND 20 THEN '15-20 languages'
+            WHEN lang_num BETWEEn 20 and 30 then '20-30 languages'
             ELSE '>30 languages'
        END AS language_bucket,
        avg(user_rating) AS Avg_Rating
 FROM AppleStore
 GROUP BY language_bucket
-ORDER BY Avg_Rating DESC
+ORDER BY lang_num ASC
 ```
-As the plot shows there is no linear correlation between the number of languages supported by the app and the user rating when the number of languages surpasses 10. To sum up, more languages won't get the app better ratings, however, when there are too few languages supported the user rating will decrease. The explanation beneath this behavior might be that implementing the most talked languages will ensure a better rating but implementing less spread languages won't.  
+As the plot reveals there is no linear correlation between the number of languages supported by the app and the user rating when the number of languages surpasses 15. Implementing more than 15 languages won't get the app better ratings, however, when there are too few languages supported the user rating will strongly decrease. The explanation beneath this behavior might be that implementing the most talked languages will ensure a better rating as more people can use the app, but implementing less spread languages won't as their population is not that relevant in relation to the population of most talked languages.  
 
-![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/731ef5ab-8291-4cbd-a628-603e2a8f7199)
+![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/217eeec9-c372-4971-8810-043cb05174ad)
+
 
 
 </br></br>Following the pursuit of the factors that make app ratings higher I checked the genres with higher average ratings. 
@@ -183,7 +187,7 @@ FROM AppleStore
 GROUP BY prime_genre
 ORDER BY Avg_Rating DESC
 ```
-It's interesting how Gaming is the most popular genre but it is far behind other categories when it comes to the quality of these apps. A possible explanation might be the vast presence of shovel-ware and the fact that only by downloading the app does the developer earn some money, as it is, the developer only has to make you download the app but there's no further reward for working on the retention in the app.
+It's interesting how Gaming is the most popular genre but is far behind other categories when it comes to the quality of these apps. A possible explanation might be the vast presence of shovel-ware in the Gaming category and the fact that only by downloading the app the developer earn money. 
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/b88e84f2-d0aa-4796-bc9c-c4fab2b18e56)
 
