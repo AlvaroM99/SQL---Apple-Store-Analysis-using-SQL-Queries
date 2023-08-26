@@ -183,7 +183,7 @@ FROM AppleStore
 GROUP BY language_bucket
 ORDER BY lang_num ASC
 ```
-As the plot reveals there is no linear correlation between the number of languages supported by the app and the user rating when the number of languages surpasses 15. Implementing more than 15 languages won't get the app better ratings, however, when there are too few languages supported the user rating will strongly decrease. The explanation beneath this behavior might be that implementing the most spoken languages will ensure a better rating as more people can use the app, but implementing less spread languages won't as their population is not that relevant in relation to the population of most talked languages.  
+As the plot reveals there is no linear relationship between the number of languages supported by the app and the user rating when the number of languages surpasses 15. Implementing more than 15 languages won't get the app better ratings, however, when there are too few languages supported the user rating will strongly decrease. The explanation beneath this behavior might be that implementing the most spoken languages will ensure a better rating as more people can use the app, but implementing less spread languages won't as their population is not that relevant in relationship to the population of most talked languages.  
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/217eeec9-c372-4971-8810-043cb05174ad)
 
@@ -204,7 +204,7 @@ It's interesting how Gaming is the most popular genre but is far behind other ca
 
 
 
-</br></br>Another interesting insight is the correlation between the length of the app description and its rating. To check if there's an existing correlation I applied the following query. 
+</br></br>Another interesting insight is the relationship between the length of the app description and its rating. To check if there's an existing correlation I applied the following query. 
 ```
 SELECT CASE
 	   WHEN length(b.app_desc) < 500 THEN 'Short'
@@ -223,14 +223,14 @@ ON
 GROUP BY description_length_bucket
 ORDER BY average_rating ASC
 ```
-There is a linear correlation. Longer descriptions have better ratings.
+There is a linear relationship. Longer descriptions have better ratings.
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/614259a6-af78-43a4-a5df-26bcac74215d)
 
 
-</br></br>It might also be interesting to test if other factors such as the number of screenshots, the number of devices supported or the size of the app are influential over the user rating. When the number of devices supported and the size of the application were tested versus the user rating, no correlation was unveiled.
+</br></br>It might also be interesting to test if other factors such as the number of screenshots, the number of devices supported or the size of the app are influential over the user rating. When the number of devices supported and the size of the application were tested versus the user rating, no relationship was unveiled.
 
-However, when the number of screenshots in the application description ("ipadsc_urls_num") was tested against the user rating, the outcome suggested a strong correlation. As the number of screenshots increases, so does the average user rating.
+However, when the number of screenshots in the application description ("ipadsc_urls_num") was tested against the user rating, the outcome suggested a strong relationship. As the number of screenshots increases, so does the average user rating.
 ```
 SELECT
        ipadsc_urls_num,
