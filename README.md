@@ -231,7 +231,8 @@ GROUP BY ipadsc_urls_num
 ORDER BY Avg_Rating ASC
 ```
 
-![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/95cfed86-27f6-461f-b726-0df163769891)
+![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/099a1df9-43c7-4336-ae70-421507097d8b)
+
 
 
 </br></br>Finally, I look for the best-rated app for each genre.
