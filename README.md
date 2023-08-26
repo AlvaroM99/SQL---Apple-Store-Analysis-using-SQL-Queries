@@ -1,5 +1,14 @@
 # SQL- AppleStore Querying Analysis
 
+## Index
+
+wfafw
+	- [Overview](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis#overview)
+
+
+
+
+
 ## Overview:
 With the iPhone's increasing market share, many app developers see the App Store as a growing and profitable opportunity. According to Statista, nearly 5 million apps are available in the Apple App Store as of July 2022. Even though mobile applications can be a great source of income and a showcase for companies and their services, this is still a very competitive field. For this reason, an exploratory analysis of the data can provide useful insights for these developers and their companies, thus knowing what makes an app successful.
 
