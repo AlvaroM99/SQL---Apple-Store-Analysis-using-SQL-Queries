@@ -91,7 +91,7 @@ SELECT
 	avg(user_rating) AS AvgRating
 FROM AppleStore
 ```
-The outcome of this statement was the foreseeable, 0 for the minimum, 5 for the maximum, and roughly 3.5 for the average.
+The outcome of this query was the foreseeable, 0 for the minimum, 5 for the maximum, and roughly 3.5 for the average.
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/7cd08ce6-dd5a-4b0a-8a9c-42bb98439dc9)
 
@@ -104,11 +104,11 @@ SELECT
 	avg(price) AS AvgPrice
 FROM AppleStore
 ```
-This was the statement's outcome:
+This was the snippet's outcome:
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/94e7e699-a6cc-4946-80bc-85cc741c5ee6)
 
-For the price distribution, the statement was increasingly complicated. As each app has a different price I had to categorize each app into increasing ranges by defining the start of the interval as PriceBinStart and the end of it as PriceBinEnd. Sadly, SQLite 3 doesn't support columns with interval values, thus merging the two generated columns into a range column was not an option. 
+For the price distribution, the query starts to become increasingly complicated. As each app has a different price I had to categorize each app into increasing ranges by defining the start of the interval as PriceBinStart and the end of it as PriceBinEnd. Sadly, SQLite 3 doesn't support columns with interval values, thus merging the two generated columns into a range column was not an option. 
 ```
 SELECT
 	(price/2)*2 AS PriceBinStart,
@@ -195,7 +195,7 @@ It's interesting how Gaming is the most popular genre but is far behind other ca
 
 
 
-</br></br>Another interesting insight is the correlation between the length of the app description and its rating. To check if there's an existing correlation I applied the following statement. 
+</br></br>Another interesting insight is the correlation between the length of the app description and its rating. To check if there's an existing correlation I applied the following query. 
 ```
 SELECT CASE
 	   WHEN length(b.app_desc) < 500 THEN 'Short'
