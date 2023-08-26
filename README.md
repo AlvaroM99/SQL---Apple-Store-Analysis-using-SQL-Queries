@@ -92,6 +92,7 @@ SELECT
 FROM AppleStore
 ```
 The outcome of this statement was the foreseeable, 0 for the minimum, 5 for the maximum, and roughly 3.5 for the average.
+
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/7cd08ce6-dd5a-4b0a-8a9c-42bb98439dc9)
 
 
