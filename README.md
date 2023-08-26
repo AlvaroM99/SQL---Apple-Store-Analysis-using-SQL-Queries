@@ -198,7 +198,7 @@ FROM AppleStore
 GROUP BY prime_genre
 ORDER BY Avg_Rating DESC
 ```
-It's interesting how Gaming is the most popular genre but is far behind other categories when it comes to the quality of these apps. A possible explanation might be the vast presence of shovel-ware in the Gaming category and the fact that only by downloading the app the developer earn money. 
+It's interesting how Gaming is the most popular genre but is far behind other categories when it comes to the quality of these apps. A possible explanation might be the vast presence of shovelware in the Gaming category and the fact that only by downloading the app the developer earn money. 
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/b88e84f2-d0aa-4796-bc9c-c4fab2b18e56)
 
