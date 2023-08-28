@@ -272,7 +272,7 @@ To summarize the insights unveiled during the querying data analysis I will list
 2. Apps supporting a moderate amount of the most spoken languages have higher ratings, so it is not about implementing a lot of languages but focusing on the right ones.
 3. Finance and Books apps have very low ratings but there's a market gap that companies could profit from by developing apps with more features that engage these apps' consumers and potentially occupy their market.
 4. Apps with longer descriptions and more screenshots can set click expectation and eventually lead to a download. Moreover, well-crafted and clearly depicted descriptions showing the app's features and capabilities are appreciated by users.
-5. Games and Entertainment categories have a very high volume of apps, suggesting that these markets may be saturated and entering them might be too challenging. However, this also reveals a higher user demand for this categories.  
+5. Games and Entertainment categories have a remarkably high volume of apps, suggesting that these markets may be saturated and entering them might be too challenging. However, this also reveals a higher user demand for these categories.  
 
 
 
