@@ -145,7 +145,6 @@ GROUP BY price_bucket
 ORDER BY NumApps DESC
 ```
 Most of the apps are free, that's why the [0 to 5$ range accounts for almost all the apps. As the price interval increases the number of apps starts to shrink, up to the point where ranges above 25 dollars account for very few apps.
-
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/9fc0b45b-f93c-4552-8fce-8bdde412a5a0)
 
 
