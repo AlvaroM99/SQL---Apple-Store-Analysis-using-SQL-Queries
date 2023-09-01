@@ -1,4 +1,4 @@
-# SQL- AppleStore Querying Analysis
+# SQL- AppleStore Analysis using SQL Queries
 
 ## Index
 
