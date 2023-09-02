@@ -17,15 +17,15 @@
 </br>
 
 ## Overview:
-<p align="justify"> With the iPhone's increasing market share, many app developers see the App Store as a growing and profitable opportunity. According to Statista, nearly 5 million apps are available in the Apple App Store as of July 2022. Even though mobile applications can be a great source of income and a showcase for companies and their services, this is still a very competitive field. For this reason, an exploratory analysis of the data can provide useful insights for these developers and their companies, thus knowing what makes an app successful.
+<p align="justify"> With the iPhone's increasing market share, many app developers see the App Store as a growing and profitable opportunity. According to Statista, nearly 5 million apps are available in the Apple App Store as of July 2022. Even though mobile applications can be a great source of income and a showcase for companies and their services, this is still a very competitive field. For this reason, an exploratory analysis of the data can provide useful insights for these developers and their companies, thus knowing what makes an app successful.</p>
 
-<p align="justify"> For this analysis, I will be using the Kaggle dataset named App Statistics (Apple iOS app store). Data source: (https://www.kaggle.com/datasets/ramamet4/app-store-apple-data-set-10k-apps). To showcase different SQL skills this querying exploratory analysis will be done entirely using the sqlonline tool (https://sqliteonline.com/) which provides a wide range of engines and an in-engine visualization tool. This time I have chosen SQLite engine instead of MySQL due to its better performance and lightweight.
+<p align="justify"> For this analysis, I will be using the Kaggle dataset named App Statistics (Apple iOS app store). Data source: (https://www.kaggle.com/datasets/ramamet4/app-store-apple-data-set-10k-apps). To showcase different SQL skills this querying exploratory analysis will be done entirely using the sqlonline tool (https://sqliteonline.com/) which provides a wide range of engines and an in-engine visualization tool. This time I have chosen SQLite engine instead of MySQL due to its better performance and lightweight.</p>
 
 </br>
 
 ## Dataset
 
-<p align="justify"> This dataset contains detailed data from more than 7000 mobile applications within the Apple Store. The dataset was extracted from the iTunes Search API in July 2017. In the raw data folder, there are two CSV files; the crucial one is named appleStore.csv and it includes the main characteristics and details of each application, and the other one is called appleStore_description_combined.csv which includes the description of each application. 
+<p align="justify"> This dataset contains detailed data from more than 7000 mobile applications within the Apple Store. The dataset was extracted from the iTunes Search API in July 2017. In the raw data folder, there are two CSV files; the crucial one is named appleStore.csv and it includes the main characteristics and details of each application, and the other one is called appleStore_description_combined.csv which includes the description of each application. </p>
 
 The contents of appStore.csv are listed as the following:
   - id: App ID
@@ -45,13 +45,17 @@ The contents of appStore.csv are listed as the following:
   - lang.num: Number of supported languages
   - vpp_lic: Vpp Device Based Licensing Enabled
 
+</br>
+
 The contents of appleStore_description.csv are listed as the following:
   - id: App ID
   - track_name: Application name
   - size_bytes: Memory size (in Bytes)
   - app_desc: Application description
 
-<p align="justify"> The sqlonline webpage has a little downside, its free version doesn't support files as big as appleStore_description.csv. That's why this file was partitioned into 4 pieces and later merged using the CREATE TABLE and UNION ALL commands. 
+</br>
+
+<p align="justify"> The sqlonline webpage has a little downside, its free version doesn't support files as big as appleStore_description.csv. That's why this file was partitioned into 4 pieces and later merged using the CREATE TABLE and UNION ALL commands. </p>
 
 </br>
 
@@ -99,7 +103,7 @@ GROUP BY prime_genre
 ORDER BY NumApps DESC
 ```
 
-<p align="justify"> From the bar chart, I found out that Games, Entertainment, Education, Photos & Videos, and Utilities are the top 5 largest categories. However, the category of Games outshines the rest as it surpasses the second-largest category (Entertainment) by almost 7 times.
+<p align="justify"> From the bar chart, I found out that Games, Entertainment, Education, Photos & Videos, and Utilities are the top 5 largest categories. However, the category of Games outshines the rest as it surpasses the second-largest category (Entertainment) by almost 7 times. </p>
 	
 </br>
 
@@ -107,7 +111,7 @@ ORDER BY NumApps DESC
     <img width="85%" src="https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/98602544-999a-4cdb-85db-1ce303b92ba7">
 </p>
 
-<p align="justify"> Digging deeper, I also plotted a pie chart that shows the distribution of each relevant category by changing SELECT with PIE-SELECT and adding an ending limiting clause to only plot the 5 most important categories. The purpose is to visualize the huge proportion that games take up in the app market when compared to other application categories. As intended, the chart perfectly depicts how the Games category accounts for most of the AppleStore market share and thus the gaming industry is shown to be the mainstay of the AppleStore service.
+<p align="justify"> Digging deeper, I also plotted a pie chart that shows the distribution of each relevant category by changing SELECT with PIE-SELECT and adding an ending limiting clause to only plot the 5 most important categories. The purpose is to visualize the huge proportion that games take up in the app market when compared to other application categories. As intended, the chart perfectly depicts how the Games category accounts for most of the AppleStore market share and thus the gaming industry is shown to be the mainstay of the AppleStore service.</p>
 	
 </br>
 
@@ -146,7 +150,9 @@ This was the snippet's outcome:
     <img width="42%" src="https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/94e7e699-a6cc-4946-80bc-85cc741c5ee6">
 </p>
 
-<p align="justify"> For the price distribution, the query starts to become increasingly complicated. As each app has a different price I had to categorize each app into increasing ranges by defining the start of the interval as PriceBinStart and the end of it as PriceBinEnd. Sadly, SQLite 3 doesn't support columns with interval values, thus merging the two generated columns into a range column was not an option. 
+</br></br>
+
+<p align="justify"> For the price distribution, the query starts to become increasingly complicated. As each app has a different price I had to categorize each app into increasing ranges by defining the start of the interval as PriceBinStart and the end of it as PriceBinEnd. Sadly, SQLite 3 doesn't support columns with interval values, thus merging the two generated columns into a range column was not an option. </p>
 	
 ```
 SELECT
@@ -157,7 +163,7 @@ FROM AppleStore
 GROUP BY PriceBinStart
 ORDER BY PriceBinStart
 ```
-<p align="justify"> However, this snippet of code as fast and lightweight as it is, was useless when trying to visualize it with the limited in-engine visualization tool embedded in sqlonline. It needed two columns acting as x and y, and merging the prices columns was impossible. Hence, I had to wrap my mind around and come out with a solution that is far less elegant but works when it comes to visualizing the results.
+<p align="justify"> However, this snippet of code as fast and lightweight as it is, was useless when trying to visualize it with the limited in-engine visualization tool embedded in sqlonline. It needed two columns acting as x and y, and merging the prices columns was impossible. Hence, I had to wrap my mind around and come out with a solution that is far less elegant but works when it comes to visualizing the results. </p>
 	
 ```
 SELECT CASE
@@ -180,7 +186,7 @@ Most of the apps are free, that's why the [0 to 5$ range accounts for almost all
 </br>
 
 <p align="center" width="100%">
-    <img width="88%" src="https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/9fc0b45b-f93c-4552-8fce-8bdde412a5a0">
+    <img width="90%" src="https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/9fc0b45b-f93c-4552-8fce-8bdde412a5a0">
 </p>
 
 </br>
@@ -198,7 +204,7 @@ SELECT CASE
 FROM AppleStore
 GROUP BY App_Type
 ```
-<p align="justify"> The output unveiled a significant difference of 0.35 in the rating, which suggests that paid apps have better quality than free ones. It may not be seen as a huge difference but it is, regarding the short 0 to 5 scale of the user rating variable and the measures being averages of the users' ratings. This could be due to the fact that users who pay for an app may be predisposed to have a higher engagement and perceive the product they purchased as more valuable.
+<p align="justify"> The output unveiled a significant difference of 0.35 in the rating, which suggests that paid apps have better quality than free ones. It may not be seen as a huge difference but it is, regarding the short 0 to 5 scale of the user rating variable and the measures being averages of the users' ratings. This could be due to the fact that users who pay for an app may be predisposed to have a higher engagement and perceive the product they purchased as more valuable.</p>
 
 <p align="center" width="100%">
     <img width="38%" src="https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/41583b4e-5180-42b5-9b71-86cd34ba6e4b">
@@ -220,9 +226,9 @@ FROM AppleStore
 GROUP BY language_bucket
 ORDER BY lang_num ASC
 ```
-<p align="justify"> As the plot reveals there is no linear relationship between the number of languages supported by the app and the user rating when the number of languages surpasses 15. Implementing more than 15 languages won't get the app better ratings, however, when there are too few languages supported the user rating will strongly decrease. The explanation beneath this behavior might be that implementing the most spoken languages will ensure a better rating as more people can use the app, but implementing less spread languages won't as their population is not that relevant in relationship to the population of most talked languages.  
+<p align="justify"> As the plot reveals there is no linear relationship between the number of languages supported by the app and the user rating when the number of languages surpasses 15. Implementing more than 15 languages won't get the app better ratings, however, when there are too few languages supported the user rating will strongly decrease. The explanation beneath this behavior might be that implementing the most spoken languages will ensure a better rating as more people can use the app, but implementing less spread languages won't as their population is not that relevant in relationship to the population of most talked languages. </p>
 
-</br></br>
+</br>
 
 <p align="center" width="100%">
     <img width="88%" src="https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/217eeec9-c372-4971-8810-043cb05174ad">
@@ -238,7 +244,7 @@ FROM AppleStore
 GROUP BY prime_genre
 ORDER BY Avg_Rating DESC
 ```
-<p align="justify"> It's interesting how Gaming is the most popular genre but is far behind other categories when it comes to the quality of these apps. A possible explanation might be the vast presence of shovelware in the Gaming category and the fact that only by downloading the app the developer earn money. 
+<p align="justify"> It's interesting how Gaming is the most popular genre but is far behind other categories when it comes to the quality of these apps. A possible explanation might be the vast presence of shovelware in the Gaming category and the fact that only by downloading the app the developer earn money. </p>
 
 </br>
 
@@ -275,9 +281,9 @@ There is a linear positive relationship, longer descriptions have better ratings
 </p>
 
 
-</br></br><p align="justify"> It might also be interesting to test if other factors such as the number of screenshots, the number of devices supported or the size of the app are influential over the user rating. When the number of devices supported and the size of the application were tested versus the user rating, no relationship was unveiled.
+</br></br><p align="justify"> It might also be interesting to test if other factors such as the number of screenshots, the number of devices supported or the size of the app are influential over the user rating. When the number of devices supported and the size of the application were tested versus the user rating, no relationship was unveiled.</p>
 
-<p align="justify"> However, when the number of screenshots in the application description ("ipadsc_urls_num") was tested against the user rating, the outcome suggested a strong relationship. As the number of screenshots increases, so does the average user rating.
+<p align="justify"> However, when the number of screenshots in the application description ("ipadsc_urls_num") was tested against the user rating, the outcome suggested a strong relationship. As the number of screenshots increases, so does the average user rating.</p>
 
 ```
 SELECT
