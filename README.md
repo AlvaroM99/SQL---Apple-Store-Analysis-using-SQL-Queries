@@ -1,4 +1,5 @@
 # SQL- AppleStore Analysis using SQL Queries
+</br>
 
 ## Index
 
@@ -8,11 +9,14 @@
 - [Exploratory Analysis](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis#exploratory-analysis)
 - [Data Analysis](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis#data-analysis)
 - [Conclusions](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis#conclusions)
+</br>
 
 ## Overview:
 With the iPhone's increasing market share, many app developers see the App Store as a growing and profitable opportunity. According to Statista, nearly 5 million apps are available in the Apple App Store as of July 2022. Even though mobile applications can be a great source of income and a showcase for companies and their services, this is still a very competitive field. For this reason, an exploratory analysis of the data can provide useful insights for these developers and their companies, thus knowing what makes an app successful.
 
 For this analysis, I will be using the Kaggle dataset named App Statistics (Apple iOS app store). Data source: [click here](https://www.kaggle.com/datasets/ramamet4/app-store-apple-data-set-10k-apps). To showcase different SQL skills this querying exploratory analysis will be done entirely using the [sqlonline](https://sqliteonline.com/) tool which provides a wide range of engines and an in-engine visualization tool. This time I have chosen SQLite engine instead of MySQL due to its better performance and lightweight.
+
+</br>
 
 ## Dataset
 This dataset contains detailed data from more than 7000 mobile applications within the Apple Store. The dataset was extracted from the iTunes Search API in July 2017. In the raw data folder, there are two CSV files; the crucial one is named appleStore.csv and it includes the main characteristics and details of each application, and the other one is called appleStore_description_combined.csv which includes the description of each application. 
@@ -43,6 +47,7 @@ The contents of appleStore_description.csv are listed as the following:
 
 The sqlonline webpage has a little downside, its free version doesn't support files as big as appleStore_description.csv. That's why this file was partitioned into 4 pieces and later merged using the CREATE TABLE and UNION ALL commands. 
 
+</br>
 
 ## Guiding Questions
 To figure out what apps in the Apple App Store have the potential to be successful, the following guiding questions were proposed.
@@ -50,7 +55,7 @@ To figure out what apps in the Apple App Store have the potential to be successf
   1. What are the app statistics for different groups?
   2. Are paid apps better than free apps?
   3. What are some possible factors that contribute to higher user ratings?
-
+</br>
 
 ## Exploratory Analysis
 To begin with, I checked the number of unique apps in both tables looking for a match. I retrieved 7197 unique app IDs for both tables.  
@@ -146,8 +151,7 @@ ORDER BY NumApps DESC
 ```
 Most of the apps are free, that's why the [0 to 5$ range accounts for almost all the apps. As the price interval increases the number of apps starts to shrink, up to the point where ranges above 25 dollars account for very few apps.
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/9fc0b45b-f93c-4552-8fce-8bdde412a5a0)
-
-
+</br></br>
 
 
 ## Data Analysis
@@ -264,6 +268,7 @@ FROM(
 
 ![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/affe6528-5a99-491f-8268-c0f6387f8795)
 
+</br>
 
 ## Conclusions
 To summarize the insights unveiled during the querying data analysis I will list them below:
