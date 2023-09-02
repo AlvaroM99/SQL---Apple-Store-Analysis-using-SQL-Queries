@@ -1,6 +1,11 @@
 # SQL- AppleStore Analysis using SQL Queries
 </br>
 
+<p align="center" width="100%">
+    <img width="100%" src="https://github.com/AlvaroM99/SQL---Apple-Store-Analysis-using-SQL-Queries/assets/129555669/50e1a039-3ca0-4430-84ae-8540d2d85ac5">
+</p>
+
+
 ## Index
 
 - [Overview](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis#overview)
@@ -14,7 +19,7 @@
 ## Overview:
 <p align="justify"> With the iPhone's increasing market share, many app developers see the App Store as a growing and profitable opportunity. According to Statista, nearly 5 million apps are available in the Apple App Store as of July 2022. Even though mobile applications can be a great source of income and a showcase for companies and their services, this is still a very competitive field. For this reason, an exploratory analysis of the data can provide useful insights for these developers and their companies, thus knowing what makes an app successful.
 
-<p align="justify"> For this analysis, I will be using the Kaggle dataset named App Statistics (Apple iOS app store). Data source: [click here](https://www.kaggle.com/datasets/ramamet4/app-store-apple-data-set-10k-apps). To showcase different SQL skills this querying exploratory analysis will be done entirely using the [sqlonline](https://sqliteonline.com/) tool which provides a wide range of engines and an in-engine visualization tool. This time I have chosen SQLite engine instead of MySQL due to its better performance and lightweight.
+<p align="justify"> For this analysis, I will be using the Kaggle dataset named App Statistics (Apple iOS app store). Data source: (https://www.kaggle.com/datasets/ramamet4/app-store-apple-data-set-10k-apps). To showcase different SQL skills this querying exploratory analysis will be done entirely using the sqlonline tool (https://sqliteonline.com/) which provides a wide range of engines and an in-engine visualization tool. This time I have chosen SQLite engine instead of MySQL due to its better performance and lightweight.
 
 </br>
 
