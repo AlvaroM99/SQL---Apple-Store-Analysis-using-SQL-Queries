@@ -95,12 +95,20 @@ ORDER BY NumApps DESC
 ```
 
 <p align="justify"> From the bar chart, I found out that Games, Entertainment, Education, Photos & Videos, and Utilities are the top 5 largest categories. However, the category of Games outshines the rest as it surpasses the second-largest category (Entertainment) by almost 7 times.
+	
+</br>
 
-![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/98602544-999a-4cdb-85db-1ce303b92ba7)
+<p align="center" width="100%">
+    <img width="85%" src="https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/98602544-999a-4cdb-85db-1ce303b92ba7">
+</p>
 
 <p align="justify"> Digging deeper, I also plotted a pie chart that shows the distribution of each relevant category by changing SELECT with PIE-SELECT and adding an ending limiting clause to only plot the 5 most important categories. The purpose is to visualize the huge proportion that games take up in the app market when compared to other application categories. As intended, the chart perfectly depicts how the Games category accounts for most of the AppleStore market share and thus the gaming industry is shown to be the mainstay of the AppleStore service.
+	
+</br>
 
-![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/88ecd76a-e937-46d6-8d17-7cba78cee908)
+<p align="center" width="100%">
+    <img width="85%" src="https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/88ecd76a-e937-46d6-8d17-7cba78cee908">
+</p>
 
 
 </br></br><p align="justify"> Following the exploratory analysis, I then looked for the apps' ratings so that we have an overview of this key variable for the upcoming data analysis. I searched for the minimum and maximum to check if there was any meaningless value and the average of all the apps. </p>
@@ -166,8 +174,11 @@ Most of the apps are free, that's why the [0 to 5$ range accounts for almost all
 
 </br>
 
-![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/9fc0b45b-f93c-4552-8fce-8bdde412a5a0)
-</br></br>
+<p align="center" width="100%">
+    <img width="88%" src="https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/9fc0b45b-f93c-4552-8fce-8bdde412a5a0">
+</p>
+
+</br>
 
 
 ## Data Analysis
@@ -184,7 +195,9 @@ GROUP BY App_Type
 ```
 <p align="justify"> The output unveiled a significant difference of 0.35 in the rating, which suggests that paid apps have better quality than free ones. It may not be seen as a huge difference but it is, regarding the short 0 to 5 scale of the user rating variable and the measures being averages of the users' ratings. This could be due to the fact that users who pay for an app may be predisposed to have a higher engagement and perceive the product they purchased as more valuable.
 
-![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/41583b4e-5180-42b5-9b71-86cd34ba6e4b)
+<p align="center" width="100%">
+    <img width="38%" src="https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/41583b4e-5180-42b5-9b71-86cd34ba6e4b">
+</p>
 
 
 </br></br>Then I tried to determine whether apps that support more languages have higher ratings.
@@ -204,8 +217,11 @@ ORDER BY lang_num ASC
 ```
 <p align="justify"> As the plot reveals there is no linear relationship between the number of languages supported by the app and the user rating when the number of languages surpasses 15. Implementing more than 15 languages won't get the app better ratings, however, when there are too few languages supported the user rating will strongly decrease. The explanation beneath this behavior might be that implementing the most spoken languages will ensure a better rating as more people can use the app, but implementing less spread languages won't as their population is not that relevant in relationship to the population of most talked languages.  
 
-![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/217eeec9-c372-4971-8810-043cb05174ad)
+</br></br>
 
+<p align="center" width="100%">
+    <img width="88%" src="https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/217eeec9-c372-4971-8810-043cb05174ad">
+</p>
 
 
 </br></br>Following the pursuit of the factors that make app ratings higher I checked the genres with higher average ratings. 
@@ -219,8 +235,11 @@ ORDER BY Avg_Rating DESC
 ```
 <p align="justify"> It's interesting how Gaming is the most popular genre but is far behind other categories when it comes to the quality of these apps. A possible explanation might be the vast presence of shovelware in the Gaming category and the fact that only by downloading the app the developer earn money. 
 
-![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/b88e84f2-d0aa-4796-bc9c-c4fab2b18e56)
+</br>
 
+<p align="center" width="100%">
+    <img width="88%" src="https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/b88e84f2-d0aa-4796-bc9c-c4fab2b18e56">
+</p>
 
 
 </br></br>Another interesting insight is the relationship between the length of the app description and its rating. To check if there's an existing correlation I applied the following query. 
@@ -242,9 +261,13 @@ ON
 GROUP BY description_length_bucket
 ORDER BY average_rating ASC
 ```
-There is a linear relationship. Longer descriptions have better ratings.
+There is a linear positive relationship, longer descriptions have better ratings.
 
-![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/614259a6-af78-43a4-a5df-26bcac74215d)
+</br>
+
+<p align="center" width="100%">
+    <img width="88%" src="https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/614259a6-af78-43a4-a5df-26bcac74215d">
+</p>
 
 
 </br></br><p align="justify"> It might also be interesting to test if other factors such as the number of screenshots, the number of devices supported or the size of the app are influential over the user rating. When the number of devices supported and the size of the application were tested versus the user rating, no relationship was unveiled.
@@ -259,9 +282,11 @@ FROM AppleStore
 GROUP BY ipadsc_urls_num
 ORDER BY Avg_Rating ASC
 ```
+</br>
 
-![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/099a1df9-43c7-4336-ae70-421507097d8b)
-
+<p align="center" width="100%">
+    <img width="65%" src="https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/099a1df9-43c7-4336-ae70-421507097d8b">
+</p>
 
 
 </br></br>Finally, I look for the best-rated app for each genre.
@@ -281,9 +306,14 @@ FROM(
  WHERE
  a.rank = 1
 ```
-![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/8793b85b-ede2-421f-b92e-9e1a4916c0fa)
 
-![image](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/affe6528-5a99-491f-8268-c0f6387f8795)
+<p align="center" width="100%">
+    <img width="65%" src="https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/8793b85b-ede2-421f-b92e-9e1a4916c0fa">
+</p>
+
+<p align="center" width="100%">
+    <img width="65%" src="https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis/assets/129555669/affe6528-5a99-491f-8268-c0f6387f8795">
+</p>
 
 </br>
 
