@@ -9,10 +9,15 @@
 ## Index
 
 - [Overview](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis#overview)
+</br>
 - [Dataset](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis#dataset)
+</br>
 - [Guiding Questions](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis#guiding-questions)
+</br>
 - [Exploratory Analysis](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis#exploratory-analysis)
+</br>
 - [Data Analysis](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis#data-analysis)
+</br>
 - [Conclusions](https://github.com/AlvaroM99/SQL---Apple-Store-Querying-Analysis#conclusions)
 </br>
 
